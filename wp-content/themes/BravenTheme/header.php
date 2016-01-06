@@ -26,10 +26,12 @@
 	<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
 	<![endif]-->
 <link type="text/css" rel="stylesheet" href="<?php bloginfo('template_directory')?>/css/jquery.mmenu.all.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="<?php bloginfo('template_directory')?>/js/jquery.mmenu.min.all.js"></script>
+<?php wp_enqueue_script("jquery"); ?>
+<?php wp_enqueue_script("jquery-ui"); ?>
 <link rel="stylesheet" type="text/css" href="<?php bloginfo('template_directory')?>/css/sass-compiled.css"><!--//needed for bios-->
+<?php wp_head(); ?>
+
+<script type="text/javascript" src="<?php bloginfo('template_directory')?>/js/jquery.mmenu.min.all.js"></script>
 <script>
 jQuery(document).ready(function($){
 		$('nav#menu').mmenu({ 
@@ -42,63 +44,6 @@ jQuery(document).ready(function($){
 }); // end JQuery
 </script>
 
-<?php if (is_home() || is_front_page() ) : ?> 
-	<script src="<?php bloginfo('template_directory')?>/js/jquery.bxslider.js"></script>
-	<script>
-		jQuery(document).ready(function($){
-			$('#slider_posts').bxSlider({
-				mode: 'horizontal',
-				useCSS: false,
-				infiniteLoop: true,
-				hideControlOnEnd: true,
-				easing: 'swing',
-				auto:true,
-				pause: 8000,
-				speed: 2000
-			});
-			$('#slider_testimonials').bxSlider({
-				mode: 'horizontal',
-				useCSS: false,
-				infiniteLoop: true,
-				hideControlOnEnd: true,
-				easing: 'swing',
-				mode: 'fade',
-				auto:true,
-				pause: 7000,
-				speed: 2800
-			});
-		}); // end JQuery
-		/*$('a').click(function(){
-			$('html, body').animate({
-				scrollTop: $('[name="' + $.attr(this, 'href').substr(1) + '"]').offset().top
-			}, 500);
-			return false;
-		});*/
-	</script>
-<?php endif; // is home || is front page ?>
-<?php if (is_page_template( 'page-with-charts.php' ) || is_home() || is_front_page() ) : ?>
-	<script src="<?php echo bloginfo('template_directory')?>/js/jquery.easypiechart.min.js"></script>
-	<script src="<?php echo bloginfo('template_directory')?>/js/wow.min.js"></script>
-	<script>
-		jQuery(document).ready(function($){
-			$('.chart').easyPieChart({
-				easing: 'easeOutBounce',
-				animate: 6000,
-				delay:8000,
-				onStep: function(from, to, percent) {
-					$(this.el).find('.percent').text(Math.round(percent));
-				}
-			});
-			var chart = window.chart = $('.chart').data('easyPieChart');
-			$('.js_update').on('click', function() {
-				chart.update(Math.random()*200-100);
-			});
-		}); // end JQuery
-		wow = new WOW();
-		wow.init();
-	</script>
-<?php endif; ?>
-<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
